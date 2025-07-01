@@ -1,0 +1,22 @@
+MODEL KARŞILAŞTIRMA RAPORU
+Veri Kaynağı: UCI Default of Credit Card Clients Dataset (ucimlrepo id=350)
+Kullanılan Özellikler (feature sayısı): 10
+Özellikler: X6, X7, X12, feature_std, feature_sum, X5, feature_mean, X13, X14, X18
+Model Tekniği: Stacking Ensemble (RandomForest, XGBoost, LightGBM, LogisticRegression final)
+Train veri boyutu: 18691
+Test veri boyutu: 9346
+Batch_size=256
+
+Sifresiz Model Sonuçları:
+Veri Türü: Şifresiz
+Accuracy: 0.7739
+AUC: 0.8570
+Calisma Suresi (sn): 7.63
+Peak Bellek Kullanimi (MB): 415.50
+
+Sifreli Model Sonuçları:
+Veri Türü: Şifreli (SEAL CKKS)
+Accuracy: 0.7307
+AUC: 0.8017
+Calisma Suresi (sn): 194.48
+Peak Bellek Kullanimi (MB): 3134.66
