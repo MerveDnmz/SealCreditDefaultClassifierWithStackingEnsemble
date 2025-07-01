@@ -1,2 +1,0 @@
-# SealStacking-Ensemble-
-# SealCreditDefaultClassifierWithStackingEnsemble
