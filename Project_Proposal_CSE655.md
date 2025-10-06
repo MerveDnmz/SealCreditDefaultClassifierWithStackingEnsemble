@@ -70,4 +70,13 @@ Please include formal citations in the final PDF (IEEE/ACM/APA) as required by c
 ### Submission
 - Deliverable: 2–3 page PDF with the sections above, figures/tables as needed, submitted by October 14, 2025, 11:59 PM.
 
+### References
+- Cheon, J. H., Kim, A., Kim, M., & Song, Y. (2017). Homomorphic encryption for arithmetic of approximate numbers. In ASIACRYPT 2017 (pp. 409–437). Springer. https://doi.org/10.1007/978-3-319-70694-8_15
+- Microsoft SEAL (release v4.x) documentation. (n.d.). https://github.com/microsoft/SEAL and https://github.com/microsoft/SEAL/tree/main/native/src/seal
+- Gilad-Bachrach, R., Dowlin, N., Laine, K., Lauter, K., Naehrig, M., & Wernsing, J. (2016). CryptoNets: Applying neural networks to encrypted data with high throughput and accuracy. In ICML 2016 (pp. 201–210). http://proceedings.mlr.press/v48/gilad-bachrach16.html
+- Wolpert, D. H. (1992). Stacked generalization. Neural Networks, 5(2), 241–259. https://doi.org/10.1016/S0893-6080(05)80023-1
+- Breiman, L. (1996). Stacked regressions. Machine Learning, 24(1), 49–64. https://doi.org/10.1007/BF00117832
+- Chen, T., & Guestrin, C. (2016). XGBoost: A scalable tree boosting system. In KDD 2016 (pp. 785–794). https://doi.org/10.1145/2939672.2939785
+- Ke, G., et al. (2017). LightGBM: A highly efficient gradient boosting decision tree. In NeurIPS 2017. https://papers.nips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html
+
 
