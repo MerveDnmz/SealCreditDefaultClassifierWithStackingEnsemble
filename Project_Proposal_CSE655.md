@@ -69,9 +69,6 @@ Please include formal citations in the final PDF (IEEE/ACM/APA) as required by c
 ### Repository
 - Source code and experiment artifacts will be maintained at: https://github.com/MerveDnmz/SealCreditDefaultClassifierWithStackingEnsemble
 
-### Submission
-- Deliverable: 2–3 page PDF with the sections above, figures/tables as needed, submitted by October 14, 2025, 11:59 PM.
-
 ### References
 - Cheon, J. H., Kim, A., Kim, M., & Song, Y. (2017). Homomorphic encryption for arithmetic of approximate numbers. In ASIACRYPT 2017 (pp. 409–437). Springer. https://doi.org/10.1007/978-3-319-70694-8_15
 - Microsoft SEAL (release v4.x) documentation. (n.d.). https://github.com/microsoft/SEAL and https://github.com/microsoft/SEAL/tree/main/native/src/seal
