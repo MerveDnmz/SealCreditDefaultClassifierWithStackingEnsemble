@@ -1,5 +1,7 @@
 ## CSE 655 – Project Proposal
 
+Student: Merve DÖNMEZ (244201001016)
+
 ### Project Topic
 Privacy-Preserving Credit Default Prediction using Homomorphic Encryption (SEAL CKKS) and Stacking Ensemble
 
