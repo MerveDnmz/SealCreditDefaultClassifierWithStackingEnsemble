@@ -121,19 +121,19 @@ class CreditDefaultClassifierWithDeepLearning:
         print("SEAL şifreleme başlatıldı (Deep Learning optimize).")
 
     def create_cnn_model(self):
-        """Create 1D CNN model for tabular data"""
+        """Create CNN model for tabular data (using Dense layers instead of Conv1D)"""
         model = Sequential([
             Input(shape=self.input_shape),
-            Conv1D(64, 3, activation='relu', padding='same'),
-            MaxPooling1D(2),
-            Conv1D(128, 3, activation='relu', padding='same'),
-            MaxPooling1D(2),
-            Conv1D(256, 3, activation='relu', padding='same'),
-            GlobalAveragePooling1D(),
+            Dense(128, activation='relu'),
+            Dropout(0.3),
+            Dense(256, activation='relu'),
+            Dropout(0.3),
             Dense(512, activation='relu'),
             Dropout(0.5),
             Dense(256, activation='relu'),
             Dropout(0.3),
+            Dense(128, activation='relu'),
+            Dropout(0.2),
             Dense(self.num_classes, activation='softmax')
         ])
         
@@ -186,14 +186,14 @@ class CreditDefaultClassifierWithDeepLearning:
         return model
 
     def create_hybrid_model(self):
-        """Create hybrid CNN-Transformer model"""
+        """Create hybrid Dense-Transformer model"""
         inputs = Input(shape=self.input_shape)
         
-        # CNN branch
-        cnn_branch = Conv1D(64, 3, activation='relu', padding='same')(tf.expand_dims(inputs, axis=1))
-        cnn_branch = MaxPooling1D(2)(cnn_branch)
-        cnn_branch = Conv1D(128, 3, activation='relu', padding='same')(cnn_branch)
-        cnn_branch = GlobalAveragePooling1D()(cnn_branch)
+        # Dense branch (instead of CNN)
+        dense_branch = Dense(128, activation='relu')(inputs)
+        dense_branch = Dropout(0.3)(dense_branch)
+        dense_branch = Dense(256, activation='relu')(dense_branch)
+        dense_branch = Dropout(0.3)(dense_branch)
         
         # Transformer branch
         transformer_branch = tf.expand_dims(inputs, axis=1)
@@ -201,7 +201,7 @@ class CreditDefaultClassifierWithDeepLearning:
         transformer_branch = GlobalAveragePooling1D()(transformer_branch)
         
         # Combine branches
-        combined = tf.concat([cnn_branch, transformer_branch], axis=1)
+        combined = tf.concat([dense_branch, transformer_branch], axis=1)
         combined = Dense(256, activation='relu')(combined)
         combined = Dropout(0.3)(combined)
         outputs = Dense(self.num_classes, activation='softmax')(combined)
@@ -218,7 +218,7 @@ class CreditDefaultClassifierWithDeepLearning:
     def train_deep_learning_models(self):
         """Train all deep learning models"""
         models_config = {
-            'CNN': self.create_cnn_model(),
+            'Dense_Network': self.create_cnn_model(),
             'Transformer': self.create_transformer_model(),
             'Hybrid': self.create_hybrid_model()
         }
@@ -306,20 +306,20 @@ class CreditDefaultClassifierWithDeepLearning:
         for name, model_info in self.models.items():
             print(f"\n{name} modeli değerlendiriliyor...")
             
-            if encrypted and name in ['CNN', 'Transformer', 'Hybrid']:
+            if encrypted and name in ['Dense_Network', 'Transformer', 'Hybrid']:
                 print("Şifreli verilerle değerlendirme...")
                 # For deep learning models, we'll use encrypted data for inference
                 # Note: This is a simplified approach - full encrypted training would be more complex
                 X_test_encrypted = self.encrypt_data_in_batches(self.X_test)
                 X_test_decrypted = self.decrypt_data_in_batches(X_test_encrypted)
                 
-                if name in ['CNN', 'Transformer', 'Hybrid']:
+                if name in ['Dense_Network', 'Transformer', 'Hybrid']:
                     y_pred_proba = model_info['model'].predict(X_test_decrypted)[:, 1]
                 else:
                     y_pred_proba = model_info['model'].predict_proba(X_test_decrypted)[:, 1]
             else:
                 print("Şifresiz verilerle değerlendirme...")
-                if name in ['CNN', 'Transformer', 'Hybrid']:
+                if name in ['Dense_Network', 'Transformer', 'Hybrid']:
                     y_pred_proba = model_info['model'].predict(self.X_test)[:, 1]
                 else:
                     y_pred_proba = model_info['model'].predict_proba(self.X_test)[:, 1]
