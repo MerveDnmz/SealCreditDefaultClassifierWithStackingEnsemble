@@ -385,7 +385,7 @@ class CreditDefaultClassifierWithDeepLearning:
                 ax.grid(True)
         
         plt.tight_layout()
-        plt.savefig('src/deep_learning_training_history.png', dpi=300, bbox_inches='tight')
+        plt.savefig('deep_learning_training_history.png', dpi=300, bbox_inches='tight')
         plt.close()
 
     def plot_roc_comparison(self, results):
@@ -403,12 +403,12 @@ class CreditDefaultClassifierWithDeepLearning:
         plt.legend()
         plt.grid(True, alpha=0.3)
         plt.tight_layout()
-        plt.savefig('src/deep_learning_roc_comparison.png', dpi=300, bbox_inches='tight')
+        plt.savefig('deep_learning_roc_comparison.png', dpi=300, bbox_inches='tight')
         plt.close()
 
     def generate_performance_report(self, results):
         """Generate comprehensive performance report"""
-        with open("src/deep_learning_performance_report.txt", "w") as f:
+        with open("deep_learning_performance_report.txt", "w") as f:
             f.write("DEEP LEARNING vs TRADITIONAL MODELS PERFORMANCE REPORT\n")
             f.write("=" * 60 + "\n\n")
             
