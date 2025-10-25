@@ -238,25 +238,25 @@ Input Data (15 features) → Feature Engineering → SMOTE → Train/Test Split
 
 #### ROC Curves Comparison (deep_learning_roc_comparison.png)
 
-Bu grafik, projemizde kullanılan Dense Network, Transformer, Hybrid ve Stacking modellerinin ROC eğrilerini ve AUC (Area Under the Curve) değerlerini karşılaştırmaktadır.
+This graph compares the ROC curves and AUC (Area Under the Curve) values of the Dense Network, Transformer, Hybrid, and Stacking models used in our project.
 
-*   **Stacking Modeli (AUC = 0.880):** En yüksek AUC değeri ile en iyi performansı sergilemiştir. Eğrisi, diğer tüm modellerin belirgin şekilde üzerindedir ve sınıflandırma yeteneğinin üstün olduğunu göstermektedir.
-*   **Transformer Modeli (AUC = 0.811):** Derin öğrenme modelleri arasında en iyi performansı göstermiştir.
-*   **Hybrid Modeli (AUC = 0.805):** Transformer modeline yakın bir performans sergilemiştir.
-*   **Dense Network Modeli (AUC = 0.801):** Derin öğrenme modelleri arasında diğerlerine göre biraz daha düşük bir AUC değerine sahiptir.
+*   **Stacking Model (AUC = 0.880):** Achieved the best performance with the highest AUC value. Its curve is significantly above all other models, demonstrating superior classification capability.
+*   **Transformer Model (AUC = 0.811):** Showed the best performance among deep learning models.
+*   **Hybrid Model (AUC = 0.805):** Demonstrated performance close to the Transformer model.
+*   **Dense Network Model (AUC = 0.801):** Had a slightly lower AUC value compared to other deep learning models.
 
-Genel olarak, Stacking ensemble modelinin, tekil derin öğrenme modellerine kıyasla daha güçlü bir genelleme ve sınıflandırma yeteneği sunduğu gözlemlenmiştir. Derin öğrenme modelleri de rastgele bir sınıflandırıcıdan çok daha iyi performans göstermiştir.
+Overall, the Stacking ensemble model was observed to offer stronger generalization and classification capability compared to individual deep learning models. Deep learning models also showed much better performance than a random classifier.
 
 ![ROC Curves Comparison](src/deep_learning_roc_comparison.png)
 
 #### Deep Learning Training History (deep_learning_training_history.png)
 
-Bu grafik, Dense Network, Transformer ve Hybrid derin öğrenme modellerinin eğitim süreçlerindeki kayıp (loss) ve doğruluk (accuracy) metriklerinin epoch'lara göre değişimini göstermektedir.
+This graph shows the changes in loss and accuracy metrics over epochs during the training processes of Dense Network, Transformer, and Hybrid deep learning models.
 
-*   **Kayıp Eğrileri:** Eğitim ve doğrulama kayıp eğrileri, modellerin öğrenme sürecini ve aşırı öğrenme (overfitting) eğilimlerini ortaya koyar. İdeal olarak, her iki kayıp eğrisinin de zamanla azalması ve birbirine yakın seyretmesi beklenir.
-*   **Doğruluk Eğrileri:** Eğitim ve doğrulama doğruluk eğrileri, modellerin eğitim ve test verileri üzerindeki performansını gösterir. Yüksek ve stabil doğruluk değerleri, modelin başarılı bir şekilde öğrendiğini ve genellediğini işaret eder.
+*   **Loss Curves:** Training and validation loss curves reveal the models' learning process and overfitting tendencies. Ideally, both loss curves should decrease over time and follow each other closely.
+*   **Accuracy Curves:** Training and validation accuracy curves show the models' performance on training and test data. High and stable accuracy values indicate that the model has learned successfully and generalizes well.
 
-Bu grafikler, her bir derin öğrenme modelinin eğitim dinamiklerini, yakınsama hızını ve genelleme yeteneğini görsel olarak değerlendirmek için kritik öneme sahiptir.
+These graphs are critical for visually evaluating the training dynamics, convergence speed, and generalization capability of each deep learning model.
 
 ![Deep Learning Training History](src/deep_learning_training_history.png)
 
