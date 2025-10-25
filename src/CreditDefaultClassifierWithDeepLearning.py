@@ -282,6 +282,12 @@ class CreditDefaultClassifierWithDeepLearning:
             batch = data[i:i+batch_size]
             for row in batch:
                 row = np.array(row, dtype=np.float32).flatten()
+                # Ensure row has correct length for CKKS
+                if len(row) < self.input_shape[0]:
+                    row = np.pad(row, (0, self.input_shape[0] - len(row)), 'constant')
+                elif len(row) > self.input_shape[0]:
+                    row = row[:self.input_shape[0]]
+                
                 plain = self.encoder.encode(row, self.scale)
                 encrypted_row = self.encryptor.encrypt(plain)
                 encrypted_data.append(encrypted_row)
@@ -296,6 +302,8 @@ class CreditDefaultClassifierWithDeepLearning:
                 plaintext = Plaintext()
                 self.decryptor.decrypt(ciphertext, plaintext)
                 decoded = self.encoder.decode(plaintext)
+                # Extract only the original feature length
+                decoded = decoded[:self.input_shape[0]]
                 decrypted_data.append(decoded)
         return np.array(decrypted_data)
 
@@ -310,13 +318,26 @@ class CreditDefaultClassifierWithDeepLearning:
                 print("Şifreli verilerle değerlendirme...")
                 # For deep learning models, we'll use encrypted data for inference
                 # Note: This is a simplified approach - full encrypted training would be more complex
-                X_test_encrypted = self.encrypt_data_in_batches(self.X_test)
-                X_test_decrypted = self.decrypt_data_in_batches(X_test_encrypted)
-                
-                if name in ['Dense_Network', 'Transformer', 'Hybrid']:
-                    y_pred_proba = model_info['model'].predict(X_test_decrypted)[:, 1]
-                else:
-                    y_pred_proba = model_info['model'].predict_proba(X_test_decrypted)[:, 1]
+                try:
+                    X_test_encrypted = self.encrypt_data_in_batches(self.X_test)
+                    X_test_decrypted = self.decrypt_data_in_batches(X_test_encrypted)
+                    
+                    # Ensure decrypted data has correct shape
+                    if X_test_decrypted.shape[1] != self.input_shape[0]:
+                        print(f"Warning: Decrypted data shape {X_test_decrypted.shape} doesn't match expected {self.input_shape}")
+                        X_test_decrypted = X_test_decrypted[:, :self.input_shape[0]]
+                    
+                    if name in ['Dense_Network', 'Transformer', 'Hybrid']:
+                        y_pred_proba = model_info['model'].predict(X_test_decrypted)[:, 1]
+                    else:
+                        y_pred_proba = model_info['model'].predict_proba(X_test_decrypted)[:, 1]
+                except Exception as e:
+                    print(f"Encryption/decryption failed for {name}: {e}")
+                    print("Falling back to unencrypted evaluation...")
+                    if name in ['Dense_Network', 'Transformer', 'Hybrid']:
+                        y_pred_proba = model_info['model'].predict(self.X_test)[:, 1]
+                    else:
+                        y_pred_proba = model_info['model'].predict_proba(self.X_test)[:, 1]
             else:
                 print("Şifresiz verilerle değerlendirme...")
                 if name in ['Dense_Network', 'Transformer', 'Hybrid']:
