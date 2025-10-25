@@ -149,8 +149,8 @@ class CreditDefaultClassifierWithDeepLearning:
         """Create Transformer model for tabular data"""
         inputs = Input(shape=self.input_shape)
         
-        # Reshape for transformer (add sequence dimension)
-        x = tf.expand_dims(inputs, axis=1)
+        # Reshape for transformer using Lambda layer
+        x = tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=1))(inputs)
         
         # Multi-head attention
         attention_output = MultiHeadAttention(
@@ -196,12 +196,12 @@ class CreditDefaultClassifierWithDeepLearning:
         dense_branch = Dropout(0.3)(dense_branch)
         
         # Transformer branch
-        transformer_branch = tf.expand_dims(inputs, axis=1)
+        transformer_branch = tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=1))(inputs)
         transformer_branch = MultiHeadAttention(num_heads=4, key_dim=32)(transformer_branch, transformer_branch)
         transformer_branch = GlobalAveragePooling1D()(transformer_branch)
         
         # Combine branches
-        combined = tf.concat([dense_branch, transformer_branch], axis=1)
+        combined = tf.keras.layers.Concatenate()([dense_branch, transformer_branch])
         combined = Dense(256, activation='relu')(combined)
         combined = Dropout(0.3)(combined)
         outputs = Dense(self.num_classes, activation='softmax')(combined)
