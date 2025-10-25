@@ -2,7 +2,7 @@
 
 **Student:** Merve DÖNMEZ (244201001016)  
 **Course:** Deep Learning and Applications (CSE 655)  
-**Presentation Duration:** 15-20 minutes  
+**Presentation Duration:** Flexible timing  
 **Date:** October 2025
 
 ---
@@ -103,9 +103,9 @@ We developed a comprehensive privacy-preserving credit default prediction system
 
 ---
 
-## Presentation Outline (15-20 minutes)
+## Presentation Outline
 
-### 1. Introduction & Motivation (2-3 minutes)
+### 1. Introduction & Motivation
 **Problem Statement:**
 - Financial data privacy concerns in machine learning
 - Need for privacy-preserving credit default prediction
@@ -116,7 +116,7 @@ We developed a comprehensive privacy-preserving credit default prediction system
 - Comprehensive model comparison and optimization
 - Practical implementation with error handling
 
-### 2. Paper 1: Practical FHE Considerations (4-5 minutes)
+### 2. Paper 1: Practical FHE Considerations
 **Problem & Motivation:**
 - FHE implementation challenges in real-world ML applications
 - Parameter selection complexity (scale, modulus, polynomial degree)
@@ -133,7 +133,7 @@ We developed a comprehensive privacy-preserving credit default prediction system
 - Supports our batch_size=256 optimization
 - Confirms accuracy preservation in our results
 
-### 3. Paper 2: SEAL vs OpenFHE Performance (4-5 minutes)
+### 3. Paper 2: SEAL vs OpenFHE Performance
 **Problem & Motivation:**
 - Need for systematic comparison of HE libraries
 - CNN inference performance under different HE implementations
@@ -149,7 +149,7 @@ We developed a comprehensive privacy-preserving credit default prediction system
 - Supports our performance optimization approach
 - Our results show SEAL works well for credit default prediction
 
-### 4. Paper 3: HEProfiler Benchmarking (3-4 minutes)
+### 4. Paper 3: HEProfiler Benchmarking
 **Problem & Motivation:**
 - Need for systematic HE library profiling
 - Performance bottleneck identification
@@ -165,7 +165,7 @@ We developed a comprehensive privacy-preserving credit default prediction system
 - Validates our performance measurement approach
 - Our implementation shows similar optimization patterns
 
-### 5. Critical Analysis & Our Contributions (2-3 minutes)
+### 5. Critical Analysis & Our Contributions
 **Critical Analysis:**
 - **Paper 1:** Excellent practical guidance but limited to specific scenarios
 - **Paper 2:** Good library comparison but focused on image data
@@ -177,7 +177,7 @@ We developed a comprehensive privacy-preserving credit default prediction system
 - **Performance Analysis:** Detailed comparison of encrypted vs unencrypted inference
 - **Practical Insights:** Batch optimization, parameter tuning, error handling
 
-### 6. Future Work & Conclusion (1-2 minutes)
+### 6. Future Work & Conclusion
 **Future Directions:**
 - Full encrypted training (not just inference)
 - GPU acceleration for HE operations
@@ -233,6 +233,32 @@ Input Data (15 features) → Feature Engineering → SMOTE → Train/Test Split
 - `deep_learning_roc_comparison.png` - ROC curves for all models
 - `deep_learning_performance_report.txt` - Detailed performance metrics
 - `CreditDefaultClassifierWithDeepLearning.py` - Complete implementation
+
+### Project Results Visualization
+
+#### ROC Curves Comparison (deep_learning_roc_comparison.png)
+
+Bu grafik, projemizde kullanılan Dense Network, Transformer, Hybrid ve Stacking modellerinin ROC eğrilerini ve AUC (Area Under the Curve) değerlerini karşılaştırmaktadır.
+
+*   **Stacking Modeli (AUC = 0.880):** En yüksek AUC değeri ile en iyi performansı sergilemiştir. Eğrisi, diğer tüm modellerin belirgin şekilde üzerindedir ve sınıflandırma yeteneğinin üstün olduğunu göstermektedir.
+*   **Transformer Modeli (AUC = 0.811):** Derin öğrenme modelleri arasında en iyi performansı göstermiştir.
+*   **Hybrid Modeli (AUC = 0.805):** Transformer modeline yakın bir performans sergilemiştir.
+*   **Dense Network Modeli (AUC = 0.801):** Derin öğrenme modelleri arasında diğerlerine göre biraz daha düşük bir AUC değerine sahiptir.
+
+Genel olarak, Stacking ensemble modelinin, tekil derin öğrenme modellerine kıyasla daha güçlü bir genelleme ve sınıflandırma yeteneği sunduğu gözlemlenmiştir. Derin öğrenme modelleri de rastgele bir sınıflandırıcıdan çok daha iyi performans göstermiştir.
+
+![ROC Curves Comparison](src/deep_learning_roc_comparison.png)
+
+#### Deep Learning Training History (deep_learning_training_history.png)
+
+Bu grafik, Dense Network, Transformer ve Hybrid derin öğrenme modellerinin eğitim süreçlerindeki kayıp (loss) ve doğruluk (accuracy) metriklerinin epoch'lara göre değişimini göstermektedir.
+
+*   **Kayıp Eğrileri:** Eğitim ve doğrulama kayıp eğrileri, modellerin öğrenme sürecini ve aşırı öğrenme (overfitting) eğilimlerini ortaya koyar. İdeal olarak, her iki kayıp eğrisinin de zamanla azalması ve birbirine yakın seyretmesi beklenir.
+*   **Doğruluk Eğrileri:** Eğitim ve doğrulama doğruluk eğrileri, modellerin eğitim ve test verileri üzerindeki performansını gösterir. Yüksek ve stabil doğruluk değerleri, modelin başarılı bir şekilde öğrendiğini ve genellediğini işaret eder.
+
+Bu grafikler, her bir derin öğrenme modelinin eğitim dinamiklerini, yakınsama hızını ve genelleme yeteneğini görsel olarak değerlendirmek için kritik öneme sahiptir.
+
+![Deep Learning Training History](src/deep_learning_training_history.png)
 
 ### Repository
 - **GitHub:** https://github.com/MerveDnmz/SealCreditDefaultClassifierWithStackingEnsemble
